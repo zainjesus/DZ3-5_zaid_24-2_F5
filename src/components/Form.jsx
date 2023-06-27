@@ -7,7 +7,7 @@ const Form = () => {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
 
-  const formData = useSelector((state) => state);
+  const formData = useSelector((state) => state.form);
   const dispatch = useDispatch();
 
   const handleNameChange = (e) => {
