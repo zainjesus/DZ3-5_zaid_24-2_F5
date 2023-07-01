@@ -1,10 +1,23 @@
-import { legacy_createStore as createStore, combineReducers } from 'redux'
-import { formReducer } from './formReducer'
-import { todosReducer } from './todosReducer'
+import { 
+    legacy_createStore as createStore, 
+    combineReducers,
+    applyMiddleware
+} from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
+import { todosReducer } from './todosReducer';
+import { formReducer } from './formReducer';
+import { postReducer } from './postReducer';
 
 const rootReducer = combineReducers({
-    todos: todosReducer,
-    form: formReducer
-})
+  todos: todosReducer,
+  form: formReducer,
+  posts: postReducer,
+});
 
-export default createStore(rootReducer)
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
+
+export default store;
