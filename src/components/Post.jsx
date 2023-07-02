@@ -11,13 +11,13 @@ const Posts = () => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
-  const [expandedPostId, setExpandedPostId] = useState(null);
+  const [expandedPostIds, setExpandedPostIds] = useState([]);
 
   const handlePostClick = (postId) => {
-    if (expandedPostId === postId) {
-      setExpandedPostId(null);
+    if (expandedPostIds.includes(postId)) {
+      setExpandedPostIds(expandedPostIds.filter((id) => id !== postId));
     } else {
-      setExpandedPostId(postId);
+      setExpandedPostIds([...expandedPostIds, postId]);
       if (!comments[postId]) {
         dispatch(fetchComments(postId));
       }
@@ -31,7 +31,7 @@ const Posts = () => {
         {posts.map((post) => (
           <li key={post.id} onClick={() => handlePostClick(post.id)}>
             {post.title}
-            {expandedPostId === post.id && (
+            {expandedPostIds.includes(post.id) && (
               <ul>
                 {comments[post.id] &&
                   comments[post.id].map((comment) => <li key={comment.id}>{comment.body}</li>)}
