@@ -3,15 +3,15 @@ import {
     combineReducers,
     applyMiddleware
 } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk';
 import { todosReducer } from './todosReducer';
 import { formReducer } from './formReducer';
 import { postReducer } from './postReducer';
 
 const rootReducer = combineReducers({
-  todos: todosReducer,
   form: formReducer,
+  todos: todosReducer,
   posts: postReducer,
 });
 
